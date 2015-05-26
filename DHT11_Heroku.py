@@ -25,17 +25,9 @@ import os
 import psycopg2
 import urlparse # import urllib.parse for python 3+
 import time
-from max31855 import MAX31855, MAX31855Error
 
 
-#MAX31855 SPI connection
 
-clock_pin = 17
-cs_pin = 27
-data_pin = 22
-units = "c"
-thermocouple = MAX31855(cs_pin, clock_pin, data_pin, units)
-#thermocouple.cleanup()
 
 #Connecting to the Database
 result = urlparse.urlparse("postgres://lfcyvocrprinfv:VZx4A6-62bpWvb_fSxTzO1WglF@ec2-174-129-26-115.compute-1.amazonaws.com:5432/de4mu7op30gi0e")
@@ -57,11 +49,9 @@ try:
         cur = con.cursor()
         
         while True:
-
-                surtemp=thermocouple.get()
                 humidity, temperature = Adafruit_DHT.read_retry(11, 4)
                 if humidity is not None and temperature is not None:
-                        temp = temperature
+                        temp = (temperature*0.75)
                         hum = humidity
 
                         cur.execute("INSERT INTO UID003A (temperature, humidity) VALUES ('"+str(temp)+"', '"+str(hum)+"')")
@@ -77,7 +67,6 @@ try:
 
                         print temp
                         print hum
-                        print surtemp
 
                         #print 'Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperature, humidity)
                 else:
