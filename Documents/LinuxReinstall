@@ -1,0 +1,25 @@
+Install Google Chrome
+-----------------------
+sudo apt-get install libxss1 libappindicator1 libindicator7 && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo dpkg -i google-chrome*.deb
+
+Install  git
+-------------------------
+sudo apt-get update && sudo apt-get install git
+
+How to install heroku
+------------------------
+sudo apt-get install python-setuptools && sudo easy_install pip && sudo pip install virtualenv && wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+Install Django
+-------------------------
+sudo apt-get update && sudo apt-get install python-django && django-admin --version
+ 
+Clone existing labmon
+-------------------------
+heroku login
+heroku git:clone -a labmon
+cd labmon
+git add .
+git commit -am "make it better"
+git push heroku master
+heroku run python manage.py runserver
