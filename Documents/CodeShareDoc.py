@@ -7,12 +7,19 @@ git clone https://github.com/mstfmomin/labmonweb.git
 git clone https://github.com/mstfmomin/labmonedoc.git
 
 How to install heroku
-sudo apt-get install python-setuptools
+sudo apt-get install python-setuptools && sudo easy_install pip && sudo pip install virtualenv && wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 sudo easy_install pip
 sudo pip install virtualenv
 wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
-git remote add heroku git@heroku.com:labmon.git
+heroku login
+heroku git:clone -a labmon
+cd labmon
+
+git add .
+git commit -am "make it better"
+git push heroku master
+
 heroku run python manage.py runserver
 
 
