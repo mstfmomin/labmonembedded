@@ -19,7 +19,9 @@ Clone existing labmon
 heroku login
 heroku git:clone -a labmon
 cd labmon
+source venv/bin/activate
 git add .
 git commit -am "make it better"
 git push heroku master
+
 heroku run python manage.py runserver
