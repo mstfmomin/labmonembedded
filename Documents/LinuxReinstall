@@ -25,4 +25,8 @@ git add .
 git commit -am "make it better"
 git push heroku master
 
-heroku run python manage.py runserver
+Run heroku app locally
+-------------------------------------
+sudo apt-get install libpq-dev python-dev
+pip install -r requirements.txt --allow-all-external
+foreman start web || heroku run python manage.py runserver
