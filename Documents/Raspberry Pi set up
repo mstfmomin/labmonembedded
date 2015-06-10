@@ -1,8 +1,96 @@
 Burn SD card
 enable SSH
 Give device uniq name: UID000A
+
+Install Chrome
+--------------------------
+sudo apt-get update
+sudo apt-get install chromium
+
 Find IP address. 
+------------------------
 hostname -I
+
+Install Git
+------------
+sudo apt-get update
+sudo apt-get install git
+
 Install LAMP:
+--------------------
 sudo apt-get update
 sudo apt-get install apache2 php5 php5-mysql mysql-server
+set password: raspberry
+
+Testing mysql:
+----------------
+mysql -u root -p
+enter password: raspberry
+
+CREATE DATABASE my_db;
+SELECT VERSION(), CURRENT_DATE;
+
+CREATE USER 'willie'@'localhost' IDENTIFIED BY 'begoode';
+GRANT ALL PRIVILEGES ON *.* TO 'willie'@'localhost'
+WITH GRANT OPTION;
+USE my_db;
+SHOW TABLES;
+CREATE TABLE my_table (ID int, WiFiName varchar(255), WiFiPass varchar(255), DbName varchar(255), TableName varchar(255), UserName varchar(255), UserPass varchar(255), Email varchar(255));
+
+SELECT User FROM mysql.user;
+SHOW COLUMNS FROM my_table;
+
+Setting Local website
+-----------------------
+cd /var/www/
+sudo nano index.html
+past the follwing code:
+###########################
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Records Form</title>
+</head>
+<body>
+<form action="insert.php" method="post">
+    <p>
+        <label for="WiFiName">SSID:</label>
+        <input type="text" name="WiFiName" id="WiFiName">
+    </p>
+    <p>
+        <label for="WiFiPass">WiFiPass:</label>
+        <input type="text" name="WiFiPass" id="WiFiPass">
+    </p>
+    
+    <p>
+        <label for="DbName">DbName:</label>
+        <input type="text" name="DbName" id="DbName">
+    </p>
+    <p>
+        <label for="TableName">TableName:</label>
+        <input type="text" name="TableName" id="TableName">
+    </p>
+    
+    
+    <p>
+        <label for="UserName">UserName:</label>
+        <input type="text" name="UserName" id="UserName">
+    </p>
+    <p>
+        <label for="UserPass">UserPass:</label>
+        <input type="text" name="UserPass" id="UserPass">
+    </p>
+    
+    <p>
+        <label for="Email">Email:</label>
+        <input type="text" name="Email" id="Email">
+    </p>
+    <input type="submit" value="Add Records">
+</form>
+</body>
+</html>
+
+#####################################
+
