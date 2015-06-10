@@ -2,6 +2,10 @@ Burn SD card
 enable SSH
 Give device uniq name: UID000A
 
+Install keyboard setting
+-----------------------------------
+sudo dpkg-reconfigure keyboard-configuration
+
 Install Chrome
 --------------------------
 sudo apt-get update
@@ -93,4 +97,80 @@ past the follwing code:
 </html>
 
 #####################################
+
+Install labmon embedded
+------------------------
+cd $Home
+git clone https://github.com/mstfmomin/labmonembedded.git
+
+
+Install DHT22 library
+----------------------------------
+cd labmonembedded
+git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+cd Adafruit_Python_DHT
+sudo apt-get update && sudo apt-get install build-essential python-dev && sudo python setup.py install
+
+Test DHT22 Library
+--------------------------
+cd examples && sudo ./AdafruitDHT.py 11 4
+
+Test MAX31855
+------------------------------
+sudo idle
+open the MAX31855test.py
+Run
+
+Install postgres
+-----------------
+sudo apt-get install postgresql
+password: raspberry
+
+
+
+
+cd /var/www/
+sudo nano insert.php
+
+#####################################
+<?php
+/* Attempt MySQL server connection. Assuming you are running MySQL
+server with default setting (user 'root' with no password) */
+$link = mysqli_connect("localhost", "willie", "begoode", "my_db");
+ 
+// Check connection
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+ 
+// Escape user inputs for security
+$WiFiName = mysqli_real_escape_string($link, $_POST['WiFiName']);
+$WiFiPass = mysqli_real_escape_string($link, $_POST['WiFiPass']);
+
+$DbName = mysqli_real_escape_string($link, $_POST['DbName']);
+$TableName = mysqli_real_escape_string($link, $_POST['TableName']);
+
+$UserName = mysqli_real_escape_string($link, $_POST['UserName']);
+$UserPass = mysqli_real_escape_string($link, $_POST['UserPass']);
+
+$Email = mysqli_real_escape_string($link, $_POST['Email']);
+ 
+// attempt insert query execution
+$sql = "INSERT INTO my_table (WiFiName, WiFiPass, DbName, TableName, UserName, UserPass, Email) VALUES ('$WiFiName', '$WiFiPass', '$DbName', '$TableName', '$UserName', '$UserPass', '$Email')";
+if(mysqli_query($link, $sql)){
+    echo "Records added successfully.";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+ 
+// close connection
+mysqli_close($link);
+
+// Run python script
+$command = escapeshellcmd('/usr/custom/test.py');
+$output = shell_exec($command);
+echo $output;
+?>
+
+##############################################################################################
 
