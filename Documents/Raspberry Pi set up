@@ -1,0 +1,8 @@
+Burn SD card
+enable SSH
+Give device uniq name: UID000A
+Find IP address. 
+hostname -I
+Install LAMP:
+sudo apt-get update
+sudo apt-get install apache2 php5 php5-mysql mysql-server
