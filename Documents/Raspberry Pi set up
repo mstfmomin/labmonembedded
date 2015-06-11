@@ -1,19 +1,17 @@
 Burn SD card
 enable SSH
 Give device uniq name: UID000A
-
-Install keyboard setting
------------------------------------
-sudo dpkg-reconfigure keyboard-configuration
+Expand file system
 
 Install Chrome
 --------------------------
 sudo apt-get update
 sudo apt-get install chromium
 
-Find IP address. 
-------------------------
-hostname -I
+Install keyboard setting
+-----------------------------------
+sudo apt-get update && sudo dpkg-reconfigure keyboard-configuration
+
 
 Install Git
 ------------
@@ -22,8 +20,10 @@ sudo apt-get install git
 
 Install LAMP:
 --------------------
-sudo apt-get update
-sudo apt-get install apache2 php5 php5-mysql mysql-server
+sudo apt-get update && apt-get upgrade
+sudo apt-get install apache2 php5 libapache2-mod-php5
+sudo service apache2 restart
+sudo apt-get install mysql-server php5-mysql
 set password: raspberry
 
 Testing mysql:
@@ -43,6 +43,56 @@ CREATE TABLE my_table (ID int, WiFiName varchar(255), WiFiPass varchar(255), DbN
 
 SELECT User FROM mysql.user;
 SHOW COLUMNS FROM my_table;
+
+
+Install labmon embedded
+------------------------
+cd $Home
+git clone https://github.com/mstfmomin/labmonembedded.git
+
+
+Install DHT22 library
+----------------------------------
+cd labmonembedded && git clone https://github.com/adafruit/Adafruit_Python_DHT.git && cd Adafruit_Python_DHT
+sudo apt-get update && sudo apt-get install build-essential python-dev && sudo python setup.py install
+
+Test DHT22 Library
+---------
+cd examples && sudo ./AdafruitDHT.py 11 4
+
+Test MAX31855
+------------------------------
+sudo python MAX31855Test.py
+
+-----------------
+sudo reboot
+----------------------
+
+
+Install psycopg2
+-----------------
+sudo apt-get update && sudo apt-get install python-psycopg2
+
+
+Run main python code
+-------------------------------
+sudo python print_row.py
+
+Install Wifi modeule:
+----------------------------------
+sudo apt-get update && sudo apt-get -y install python-pip && sudo pip install wifi
+
+-----------------
+sudo reboot
+----------------------
+
+Run python from php
+--------------------
+chmod +x /home/pi/labmonembedded/ConnectWifiFromMysql.py
+
+Install MySQL for python
+-----------------------
+sudo apt-get install python-mysqldb
 
 Setting Local website
 -----------------------
@@ -98,33 +148,6 @@ past the follwing code:
 
 #####################################
 
-Install labmon embedded
-------------------------
-cd $Home
-git clone https://github.com/mstfmomin/labmonembedded.git
-
-
-Install DHT22 library
-----------------------------------
-cd labmonembedded
-git clone https://github.com/adafruit/Adafruit_Python_DHT.git
-cd Adafruit_Python_DHT
-sudo apt-get update && sudo apt-get install build-essential python-dev && sudo python setup.py install
-
-Test DHT22 Library
---------------------------
-cd examples && sudo ./AdafruitDHT.py 11 4
-
-Test MAX31855
-------------------------------
-sudo idle
-open the MAX31855test.py
-Run
-
-Install postgres
------------------
-sudo apt-get install postgresql
-password: raspberry
 
 
 
@@ -167,10 +190,17 @@ if(mysqli_query($link, $sql)){
 mysqli_close($link);
 
 // Run python script
-$command = escapeshellcmd('/usr/custom/test.py');
-$output = shell_exec($command);
-echo $output;
+exec('sudo python /home/pi/labmonembedded/ConnectWifiFromMysql.py', $myoutput);
+var_dump($myoutput)
 ?>
 
 ##############################################################################################
 
+
+Find IP address. 
+------------------------
+hostname -I
+
+Test wifi
+-------------
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
