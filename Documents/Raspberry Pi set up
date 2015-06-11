@@ -39,7 +39,8 @@ GRANT ALL PRIVILEGES ON *.* TO 'willie'@'localhost'
 WITH GRANT OPTION;
 USE my_db;
 SHOW TABLES;
-CREATE TABLE my_table (ID int, WiFiName varchar(255), WiFiPass varchar(255), DbName varchar(255), TableName varchar(255), UserName varchar(255), UserPass varchar(255), Email varchar(255));
+CREATE TABLE my_table (Id INT AUTO_INCREMENT primary key NOT NULL, WiFiName varchar(255), WiFiPass varchar(255),DbName varchar(255),TableName varchar(255),UserName varchar(255),UserPass varchar(255),Email varchar(255)));
+
 
 SELECT User FROM mysql.user;
 SHOW COLUMNS FROM my_table;
@@ -204,3 +205,27 @@ hostname -I
 Test wifi
 -------------
 sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+
+
+Find IP address. 
+------------------------
+hostname -I
+
+Test wifi
+-------------
+/etc/network/interfaces
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+/usr/local/lib/python2.7/dist-packages/wifi/scheme.py
+
+sudo pip install https://pypi.python.org/packages/source/p/python-wifi/python-wifi-0.6.0.tar.bz2
+
+network={
+    ssid="labpump123"
+    psk="labpump123"
+}
+
+network={
+    key_mgmt=NONE
+    priority=-999
+  }
