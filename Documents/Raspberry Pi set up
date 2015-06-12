@@ -191,8 +191,13 @@ if(mysqli_query($link, $sql)){
 mysqli_close($link);
 
 // Run python script
-shell_exec('sudo python /home/pi/labmonembedded/ConnectWifiFromMysql.py 1 > /dev/null &');
+$command = escapeshellcmd('python /home/pi/labmonembedded/ConnectWifiFromMysql.$
+$output = shell_exec($command);
+echo $output;
+
 ?>
+
+
 
 ##############################################################################################
 
@@ -205,11 +210,6 @@ Test wifi
 -------------
 sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 
-
-
-Find IP address. 
-------------------------
-hostname -I
 
 Test wifi
 -------------
@@ -232,8 +232,13 @@ network={
   
 Run Python in the background
 ---------------------------
+By corntab
+--------------
 sudo chmod +x /home/pi/labmonembedded/print_row.py
 sudo crontab -e
 @reboot sudo python /home/pi/labmonembedded/print_row.py &
 
-
+By profile
+-----------
+sudo nano /etc/profile
+sudo python /home/pi/myscript.py
