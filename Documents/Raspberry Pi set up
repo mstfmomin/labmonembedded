@@ -191,8 +191,7 @@ if(mysqli_query($link, $sql)){
 mysqli_close($link);
 
 // Run python script
-exec('sudo python /home/pi/labmonembedded/ConnectWifiFromMysql.py', $myoutput);
-var_dump($myoutput)
+shell_exec('sudo python /home/pi/labmonembedded/ConnectWifiFromMysql.py 1 > /dev/null &');
 ?>
 
 ##############################################################################################
@@ -229,3 +228,12 @@ network={
     key_mgmt=NONE
     priority=-999
   }
+  
+  
+Run Python in the background
+---------------------------
+sudo chmod +x /home/pi/labmonembedded/print_row.py
+sudo crontab -e
+@reboot sudo python /home/pi/labmonembedded/print_row.py &
+
+
