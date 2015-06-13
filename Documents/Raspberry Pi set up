@@ -39,7 +39,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'willie'@'localhost'
 WITH GRANT OPTION;
 USE my_db;
 SHOW TABLES;
-CREATE TABLE my_table (Id INT AUTO_INCREMENT primary key NOT NULL, WiFiName varchar(255), WiFiPass varchar(255),DbName varchar(255),TableName varchar(255),UserName varchar(255),UserPass varchar(255),Email varchar(255)));
+CREATE TABLE my_table (ID INT AUTO_INCREMENT primary key NOT NULL, WiFiName varchar(255), WiFiPass varchar(255),DbName varchar(255),TableName varchar(255),UserName varchar(255),UserPass varchar(255),Email varchar(255));
 
 
 SELECT User FROM mysql.user;
@@ -63,7 +63,7 @@ cd examples && sudo ./AdafruitDHT.py 11 4
 
 Test MAX31855
 ------------------------------
-sudo python MAX31855Test.py
+sudo python /home/pi/labmonembedded/MAX31855Test.py
 
 -----------------
 sudo reboot
@@ -77,11 +77,12 @@ sudo apt-get update && sudo apt-get install python-psycopg2
 
 Run main python code
 -------------------------------
-sudo python print_row.py
+sudo python /home/pi/labmonembedded/print_row.py
 
 Install Wifi modeule:
 ----------------------------------
 sudo apt-get update && sudo apt-get -y install python-pip && sudo pip install wifi
+sudo pip install https://pypi.python.org/packages/source/p/python-wifi/python-wifi-0.6.0.tar.bz2
 
 -----------------
 sudo reboot
@@ -191,7 +192,7 @@ if(mysqli_query($link, $sql)){
 mysqli_close($link);
 
 // Run python script
-$command = escapeshellcmd('python /home/pi/labmonembedded/ConnectWifiFromMysql.$
+$command = escapeshellcmd('python /home/pi/labmonembedded/ConnectWifiFromMysql.py &);
 $output = shell_exec($command);
 echo $output;
 
@@ -206,7 +207,6 @@ Find IP address.
 ------------------------
 hostname -I
 
-Test wifi
 -------------
 sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 
@@ -217,17 +217,17 @@ Test wifi
 sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 /usr/local/lib/python2.7/dist-packages/wifi/scheme.py
 
-sudo pip install https://pypi.python.org/packages/source/p/python-wifi/python-wifi-0.6.0.tar.bz2
+sudo nano etc/network/interfaces
+
 
 network={
     ssid="labpump123"
-    psk="labpump123"
 }
 
 network={
     key_mgmt=NONE
     priority=-999
-  }
+}
   
   
 Run Python in the background
@@ -241,4 +241,5 @@ sudo crontab -e
 By profile
 -----------
 sudo nano /etc/profile
-sudo python /home/pi/myscript.py
+sudo python /home/pi/labmonembedded/print_row.py &
+
