@@ -27,7 +27,7 @@ import urlparse # import urllib.parse for python 3+
 import time
 from max31855 import MAX31855, MAX31855Error
 
-
+time.sleep(60)
 #MAX31855 SPI connection
 
 clock_pin = 17

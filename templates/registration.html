@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LabMon WiFi Connect</title>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div id="container">
+            <div class="title">
+                <h1>Connect LabMon to WiFi</h1>
+            </div>
+            <div id="content">
+                <form method="post" action="{{ url_for('hello') }}">
+                  <label for="ssid">Please enter your WiFi Name:</label>
+                  <input type="text" name="ssid" /><br />
+                  <label for="wifipass">Please enter your WiFi Password:</label>
+                  <input type="text" name="wifipass" /><br />
+		  <input type="submit" value="Connect"/>
+                </form>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>

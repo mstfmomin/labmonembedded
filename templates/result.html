@@ -1,0 +1,25 @@
+   <html>
+    <head>
+        <title>Result</title>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div id="container">
+            <div class="title">
+                <h1>Success! WiFi listed</h1>
+		<p>
+			Your wifi configaration file has been saved to
+			wifi configaration file. To connect to the internet
+			by wifi unplug the power cable from LabMon	
+		</p>
+            </div>
+            <div id="content">
+                LabMon has connected to <strong>{{ssid}}</strong>!
+		<h3>
+			LabMon will be restart in 5 second
+		</h4>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>
