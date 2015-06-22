@@ -158,6 +158,10 @@ sudo update-rc.d -f  BgRunConn remove
 
 -------------------------
 sudo pip install flask
+sudo apt-get install avahi-daemon
+-----------------------------------
+
+---------------------------------------------
 http://mattrichardson.com/Raspberry-Pi-Flask/
 http://code.runnable.com/UhLMQLffO1YSAADK/handle-a-post-request-in-flask-for-python
 ---------------------------------
@@ -396,3 +400,7 @@ form input[type=submit]{
 ---------------------------------
 sudo python WifiConn.py 
 ----------------------------------------
+
+
+##############################################
+https://rpi.tnet.com/project/scripts/wifi_check
