@@ -404,3 +404,51 @@ sudo python WifiConn.py
 
 ##############################################
 https://rpi.tnet.com/project/scripts/wifi_check
+
+########################################################################################################
+network={
+        key_mgmt=NONE
+        priority=-999
+}
+
+
+
+network={
+     ssid="labpump123"
+     psk="labpump123"
+}
+
+
+network={
+  ssid="MSU-Secure"
+  scan_ssid=1
+  key_mgmt=WPA-EAP
+  pairwise=CCMP TKIP
+  group=CCMP TKIP
+  eap=PEAP
+  identity="r35j966"
+  password="HeyIdiots23!"
+  phase1="peapver=0"
+  phase2="MSCHAPV2"
+  }
+  
+  ###########
+  
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet manual
+
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+auto wlan1
+allow-hotplug wlan1
+iface wlan1 inet manual
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+#################################################
