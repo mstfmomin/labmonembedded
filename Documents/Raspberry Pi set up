@@ -1,9 +1,9 @@
 Burn SD card
-enable SSH
-Give device uniq name: UID000A
 Expand file system
-Set Time zone
-set keyboard
+enable SSH
+Advance option> Hostname>Give device uniq name: UID000A
+Chose boot option: Desktop login as user pi
+International option > Set Time zone > set keyboard
 
 
 Install Chrome
@@ -157,8 +157,7 @@ sudo update-rc.d -f  BgRunConn remove
 
 
 -------------------------
-sudo pip install flask
-sudo apt-get install avahi-daemon
+sudo apt-get install flask && sudo apt-get install avahi-daemon && sudo reboot
 -----------------------------------
 
 ---------------------------------------------
